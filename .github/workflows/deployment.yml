@@ -31,7 +31,10 @@ jobs:
           node-version: '12.x'
       
       - name: Run deployment script
-        run: npm run deploy
+        # run: npm run deploy
+        run: |
+          chmod +x deploy.sh
+          sh deploy.sh
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
