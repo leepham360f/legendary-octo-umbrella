@@ -24,17 +24,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-
-      # - name: Setup Node
-      #   uses: actions/setup-node@v1
-      #   with:
-      #     node-version: '12.x'
-      
       - name: Run deployment script
-        # run: |
-        #   git fetch --tags
-        #   git describe --tags --abbrev=0
-        #   git tag -l | grep $(git describe HEAD)
         run: npm run deploy
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
