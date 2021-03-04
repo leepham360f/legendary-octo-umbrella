@@ -29,8 +29,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '12.x'
-
-      - run: node ../../deploy.js
+      
+      - name: Run deployment script
+        run: npm run deploy
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
