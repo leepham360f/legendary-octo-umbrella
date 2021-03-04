@@ -1,0 +1,7 @@
+name: 'Run nodejs deployment script'
+runs:
+  using: 'node12'
+  main: 'deploy.js'
+env:
+  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
