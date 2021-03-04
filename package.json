@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "deploy": "npm run deploy.js"
+    "deploy": "node deploy.js"
   },
   "keywords": [],
   "author": "",
