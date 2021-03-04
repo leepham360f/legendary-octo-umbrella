@@ -34,6 +34,7 @@ jobs:
         run: |
           git fetch --tags
           git describe --tags --abbrev=0
+          git tag -l | grep $(git describe HEAD)
         # run: |
         #   chmod +x deploy.sh
         #   sh deploy.sh
