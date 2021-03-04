@@ -37,11 +37,8 @@ jobs:
 
       - name: commit
         run: |
-          # Stage the file, commit and push
-          git add time.txt
-          git commit -m "new date commit"
-          git push origin master
-          git describe --tags --abbrev=0    
+          git checkout dev
+          echo $(git describe --tags --abbrev=0)
       # - name: Setup Node
       #   uses: actions/setup-node@v1
       #   with:
