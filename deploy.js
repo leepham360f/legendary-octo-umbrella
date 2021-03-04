@@ -14,11 +14,7 @@ const tag = getTag();
 console.log('Current tag', tag);
 const imageName = `hienpham95/demo-deploy:${tag}`;
 execSync(`docker build -t ${imageName} .`);
-console.log('image built successfully');
-console.log('run docker login');
-// const dockerhub = execSync(`echo "${process.env.DOCKER_PASSWORD}" | docker login -u "${process.env.DOCKER_USERNAME}" --password-stdin`).toString().trim();
-execSync(`docker login -u ${process.env.DOCKER_USERNAME} -p ${process.env.DOCKER_PASSWORD}`);
-// console.log(dockerhub);
+console.log('Image built successfully');
 const pushImage = execSync(`docker push ${imageName}`).toString().trim();
 console.log('Finished pushing image', pushImage);
 
