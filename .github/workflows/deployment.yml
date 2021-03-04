@@ -31,7 +31,9 @@ jobs:
       #     node-version: '12.x'
       
       - name: Run deployment script
-        run: git tag -l | grep $(git describe HEAD)
+        run: |
+          git fetch --tags
+          git describe --tags --abbrev=0
         # run: |
         #   chmod +x deploy.sh
         #   sh deploy.sh
