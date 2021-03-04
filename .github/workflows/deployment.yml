@@ -25,30 +25,13 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - name: save current date
-        run: |
-          # do some operation that changes a file in the git repo
-          date > time.txt
-      - name: setup git config
-        run: |
-          # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
-          git config user.name "GitHub Actions Bot"
-          git config user.email "<>"
-
-      - name: commit
-        run: |
-          git checkout dev
-          echo $(git describe --tags --abbrev=0)
-      # - name: Setup Node
-      #   uses: actions/setup-node@v1
-      #   with:
-      #     node-version: '12.x'
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
       
-      # - name: Run deployment script
-      #   run: echo "GIT_TAG=`echo $(git describe --tags --abbrev=0)`" >> $GITHUB_ENV
-        # run: |
-        #   chmod +x deploy.sh
-        #   sh deploy.sh
-        # env:
-        #   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-        #   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Run deployment script
+        run: npm run deploy
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
