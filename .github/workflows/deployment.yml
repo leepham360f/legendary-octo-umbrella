@@ -25,16 +25,16 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - name: Setup Node
-        uses: actions/setup-node@v1
-        with:
-          node-version: '12.x'
+      # - name: Setup Node
+      #   uses: actions/setup-node@v1
+      #   with:
+      #     node-version: '12.x'
       
       - name: Run deployment script
-        # run: npm run deploy
-        run: |
-          chmod +x deploy.sh
-          sh deploy.sh
+        run: git describe --tags --abbrev=0
+        # run: |
+        #   chmod +x deploy.sh
+        #   sh deploy.sh
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
