@@ -1,3 +1,7 @@
+on:
+  push:
+    branches: [ dev ]
+
 name: 'Run nodejs deployment script'
 runs:
   using: 'node12'
