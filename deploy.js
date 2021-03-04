@@ -2,6 +2,7 @@ const { execSync } = require("child_process");
 
 const getTag = () => {
   try {
+    execSync(`git fetch --tags`);
     return execSync(`git tag -l | grep $(git describe HEAD)`).toString().trim();
   } catch (error) {
     return execSync(`git describe --tags --abbrev=0`).toString().trim();
