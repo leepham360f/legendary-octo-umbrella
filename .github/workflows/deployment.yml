@@ -31,7 +31,10 @@ jobs:
           node-version: '12.x'
       
       - name: Run deployment script
-        run: npm run deploy
+        run: echo "GIT_TAG=`echo $(git describe --tags --abbrev=0)`" >> $GITHUB_ENV
+        run: |
+          chmod +x deploy.sh
+          sh deploy.sh
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
