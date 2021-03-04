@@ -1,6 +1,6 @@
 const { execSync } = require("child_process");
 
-const tag = execSync(`git describe --tags --abbrev=0`).toString().trim();
+const tag = execSync(`git tag -l | grep $(git describe HEAD)`).toString().trim();
 console.log('Current tag', tag);
 const imageName = `hienpham95/demo-deploy:${tag}`;
 execSync(`docker build -t ${imageName} .`);

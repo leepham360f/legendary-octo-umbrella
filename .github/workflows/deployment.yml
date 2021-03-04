@@ -31,13 +31,11 @@ jobs:
       #     node-version: '12.x'
       
       - name: Run deployment script
-        run: |
-          git fetch --tags
-          git describe --tags --abbrev=0
-          git tag -l | grep $(git describe HEAD)
         # run: |
-        #   chmod +x deploy.sh
-        #   sh deploy.sh
+        #   git fetch --tags
+        #   git describe --tags --abbrev=0
+        #   git tag -l | grep $(git describe HEAD)
+        run: npm run deploy
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
