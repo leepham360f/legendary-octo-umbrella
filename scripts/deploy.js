@@ -4,8 +4,9 @@ const getTag = () => {
   try {
     execSync(`git fetch --tags -f`);
     let tag = execSync(`git tag -l | grep $(git describe HEAD)`).toString().trim();
-    if(process.env.DEPLOY_ENV !== 'dev'){
-      tag = tag.replace('dev', process.env.DEPLOY_ENV);
+    const currentBranch = execSync(`git rev-parse --abbrev-ref HEAD`);
+    if(currentBranch !== 'dev'){
+      tag = tag.replace('dev', currentBranch);
     }
   } catch (error) {}
 }

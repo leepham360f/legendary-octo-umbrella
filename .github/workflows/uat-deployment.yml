@@ -29,5 +29,3 @@ jobs:
           
       - name: Run deployment script
         run: npm run deploy
-        env:
-          DEPLOY_ENV=uat
