@@ -11,11 +11,13 @@ const getTag = () => {
     const minorVersionIndex = tag.indexOf('-v') + 6
     let currentMinorVersion = tag.charAt(minorVersionIndex)
     tag = tag.split('')
-    tag[minorVersionIndex] = Number(currentMinorVersion) + 1
+    tag[minorVersionIndex] = Number(currentMinorVersion) + 2
     tag = tag.join('')
   }
 
   const currentBranch = execSync(`git rev-parse --abbrev-ref HEAD`)
+    .toString()
+    .trim()
   if (currentBranch !== 'dev') {
     tag = tag.replace('dev', currentBranch)
   }
@@ -29,8 +31,8 @@ if (!tag) {
   console.log('No tag found.')
   return
 }
-const imageName = `hienpham95/demo-deploy:${tag}`
-execSync(`docker build -t ${imageName} .`)
+const buildImageCmd = `docker build -t hienpham95/demo-deploy:${tag} .`
+execSync(buildImageCmd)
 const pushImage = execSync(`docker push ${imageName}`).toString().trim()
 console.log('Finished pushing image', pushImage)
 
