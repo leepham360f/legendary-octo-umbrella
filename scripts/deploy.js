@@ -23,7 +23,7 @@ const getTag = () => {
       tag = tag.split('')
       tag[minorVersionIndex] = Number(currentMinorVersion) + 1
       tag = tag.join('')
-      pushTag(tag)
+      pushTag(tag);
     }
   }
   
