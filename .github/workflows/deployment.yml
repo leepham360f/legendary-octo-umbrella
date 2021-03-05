@@ -31,5 +31,5 @@ jobs:
       
       - name: Create tag and build docker image
         run: npm run deploy
-          env:
-            DEPLOY_ENV=dev
+        env:
+          DEPLOY_ENV: dev
