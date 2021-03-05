@@ -10,6 +10,8 @@ const getTag = () => {
     tag = execSync(`git describe --abbrev=0`).toString().trim()
     const minorVersionIndex = tag.indexOf('-v') + 6
     let currentMinorVersion = tag.charAt(minorVersionIndex)
+
+    // auto increase minor version
     tag = tag.split('')
     tag[minorVersionIndex] = Number(currentMinorVersion) + 2
     tag = tag.join('')
@@ -31,9 +33,10 @@ if (!tag) {
   console.log('No tag found.')
   return
 }
-const buildImageCmd = `docker build -t hienpham95/demo-deploy:${tag} .`
+
+const imageName = `hienpham95/demo-deploy:${tag}`;
+const buildImageCmd = `docker build -t ${imageName} .`
 execSync(buildImageCmd)
-const pushImage = execSync(`docker push ${imageName}`).toString().trim()
-console.log('Finished pushing image', pushImage)
+execSync(`docker push ${imageName}`).toString().trim()
 
 // git tag -a fpro-v1.0.0.dev -m "tag version"
