@@ -24,25 +24,19 @@ const getTag = () => {
       tag = tag.split('')
       tag[minorVersionIndex] = Number(currentMinorVersion) + 1
       tag = tag.join('')
-      pushTag(tag)
     }
   }
   
   if (currentBranch !== 'dev') {
     tag = tag.replace('dev', currentBranch)
-    pushTag(tag)
   }
 
   return tag
 }
 
 const tag = getTag()
+pushTag(tag)
 console.log(tag)
-if (!tag) {
-  console.log('No tag found.')
-  return
-}
-
 const imageName = `hienpham95/demo-deploy:${tag}`;
 const buildImageCmd = `docker build -t ${imageName} .`
 execSync(buildImageCmd)
