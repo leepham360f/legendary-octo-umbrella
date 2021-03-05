@@ -11,7 +11,7 @@ const getTag = () => {
       tag = tag.replace('dev', currentBranch)
     }
   } catch (error) {
-    return execSync(`git describe --tags --abbrev=0`)
+    return execSync(`git describe --abbrev=0`).toString().trim();
   }
 }
 
