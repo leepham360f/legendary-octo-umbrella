@@ -4,7 +4,7 @@ const app = express()
 app.get("/", (req, res) => {
 
   res.send({
-    data: 'hello world fix bug'
+    data: 'hello world fix bug!'
   })
 })
 
