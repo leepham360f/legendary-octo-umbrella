@@ -3,10 +3,11 @@ const { execSync } = require("child_process");
 const getTag = () => {
   try {
     execSync(`git fetch --tags -f`);
-    return execSync(`git tag -l | grep $(git describe HEAD)`).toString().trim();
-  } catch (error) {
-    
-  }
+    let tag = execSync(`git tag -l | grep $(git describe HEAD)`).toString().trim();
+    if(process.env.DEPLOY_ENV !== 'dev'){
+      tag = tag.replace('dev', process.env.DEPLOY_ENV);
+    }
+  } catch (error) {}
 }
 
 const tag = getTag();
