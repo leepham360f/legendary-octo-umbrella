@@ -17,6 +17,7 @@ const getTag = () => {
 
     // auto increase minor version for dev branch
     if (currentBranch === 'dev') {
+      tag = tag.replace('dev', currentBranch)
       const minorVersionIndex = tag.indexOf('-v') + 6
       const currentMinorVersion = tag.charAt(minorVersionIndex)
       tag = tag.split('')
