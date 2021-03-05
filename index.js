@@ -10,7 +10,7 @@ const posts = {}
 app.get("/", (req, res) => {
 
   res.send({
-    data: 'hello world'
+    data: 'hello world fix bug'
   })
 })
 

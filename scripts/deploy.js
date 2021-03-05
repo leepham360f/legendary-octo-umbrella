@@ -13,7 +13,7 @@ const getTag = () => {
 
     // auto increase minor version
     tag = tag.split('')
-    tag[minorVersionIndex] = Number(currentMinorVersion) + 2
+    tag[minorVersionIndex] = Number(currentMinorVersion) + 1
     tag = tag.join('')
   }
 
