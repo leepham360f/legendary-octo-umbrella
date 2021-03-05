@@ -14,7 +14,7 @@ const getTag = () => {
   } catch (error) {
     // get lastest tag of current branch
     tag = execSync(`git describe --abbrev=0`).toString().trim()
-
+    console.log('catch tag', tag);
     // auto increase minor version for dev branch
     if (currentBranch === 'dev') {
       tag = tag.replace('dev', currentBranch)
