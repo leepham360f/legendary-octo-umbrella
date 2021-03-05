@@ -22,6 +22,8 @@ const getTag = () => {
     .trim()
   if (currentBranch !== 'dev') {
     tag = tag.replace('dev', currentBranch)
+    execSync(`git tag -a ${tag} -m "Tag UAT release."`)
+    execSync(`git push origin ${tag}`)
   }
 
   return tag
