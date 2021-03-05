@@ -11,6 +11,7 @@ const getTag = () => {
   try {
     execSync('git fetch --unshallow')
     tag = execSync(`git tag -l | grep $(git describe HEAD)`).toString().trim()
+    console.log('can get current tag', tag);
   } catch (error) {
     // get lastest tag of current branch
     tag = execSync(`git describe --abbrev=0`).toString().trim()
