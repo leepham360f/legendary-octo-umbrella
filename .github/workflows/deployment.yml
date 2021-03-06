@@ -1,4 +1,4 @@
-name: Deploy to UAT
+name: Deploy to DEV
 
 on:
   push:

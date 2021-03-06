@@ -35,11 +35,10 @@ const getTag = () => {
 }
 
 const tag = getTag()
-pushTag(tag)
 console.log(tag)
+pushTag(tag)
 const imageName = `hienpham95/demo-deploy:${tag}`;
 const buildImageCmd = `docker build -t ${imageName} .`
 execSync(buildImageCmd)
-execSync(`docker push ${imageName}`).toString().trim()
-
+execSync(`docker push ${imageName}`)
 // git tag -a fpro-v1.0.0.dev -m "tag version"
