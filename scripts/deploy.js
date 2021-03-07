@@ -9,7 +9,7 @@ const getTag = () => {
   let tag
   const currentBranch = execSync(`git rev-parse --abbrev-ref HEAD`).toString().trim()
   try {
-    execSync('git fetch --unshallow')
+    execSync('git fetch --tags --unshallow')
     tag = execSync(`git tag -l | grep $(git describe HEAD)`).toString().trim()
     console.log('can get current tag', tag);
   } catch (error) {

@@ -1,8 +1,8 @@
+require('dotenv').config()
 const express = require("express")
 const app = express()
-
+require('./rabbitmq')
 app.get("/", (req, res) => {
-
   res.send({
     data: 'hello world fix bug!'
   })
