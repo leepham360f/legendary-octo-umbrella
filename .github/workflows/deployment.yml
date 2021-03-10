@@ -42,4 +42,8 @@ jobs:
       - name: Get tag
         run: |
           echo ${{ steps.get_version.outputs.VERSION }}
-          echo ${{ github.event.release.tag_name }}
+      
+      - name: Apply k8s
+        run: echo $SOURCE_TAG
+        env:
+          SOURCE_TAG: ${{ steps.get_version.outputs.VERSION }}
