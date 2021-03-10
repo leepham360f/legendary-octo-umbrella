@@ -35,6 +35,6 @@ jobs:
           DEPLOY_ENV: dev
       - name: Get tag
         run: |
-          echo {{ github.tag }}
-          echo {{ github.sha }}
-          echo {{ github }}
+          echo ${{ github.tag }}
+          echo ${{ github.sha }}
+          echo ${{ github }}
