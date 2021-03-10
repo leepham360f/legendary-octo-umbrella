@@ -37,7 +37,7 @@ jobs:
       - name: Get the version
         id: get_version
         run: |
-          git fetch --tags --unshallow
+          git fetch --tags
           echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
 
       - name: Get tag
