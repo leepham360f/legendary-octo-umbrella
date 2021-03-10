@@ -33,3 +33,7 @@ jobs:
         run: npm run deploy
         env:
           DEPLOY_ENV: dev
+      - name: Get tag
+        run: echo {{ github.tag }}
+        run: echo {{ github.sha }}
+        run: echo {{ github }}
