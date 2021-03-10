@@ -37,8 +37,7 @@ jobs:
       - name: Get the version
         id: get_version
         run: |
-          git fetch --tags
-          echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
+          echo ::set-output name=VERSION::${git tag -l | grep $(git describe HEAD)}
 
       - name: Get tag
         run: |
