@@ -37,8 +37,9 @@ jobs:
       - name: Get the version
         id: get_version
         run: |
-          echo ::set-output name=VERSION::${git tag -l | grep $(git describe HEAD)}
+          echo ::set-output name=VERSION::$(echo $(git describe HEAD))
 
       - name: Get tag
         run: |
           echo ${{ steps.get_version.outputs.VERSION }}
+          echo ${{ github.event.release.tag_name }}
