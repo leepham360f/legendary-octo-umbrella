@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "NODE_ENV=production node app/index.js",
+    "start:jobs": "NODE_ENV=production node jobs/index.js",
     "deploy": "node scripts/deploy.js"
   },
   "keywords": [],
@@ -12,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "amqplib": "~0.7.0",
+    "bull": "^3.20.1",
     "express": "^4.17.1"
   },
   "devDependencies": {
