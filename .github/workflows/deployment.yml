@@ -33,8 +33,11 @@ jobs:
         run: npm run deploy
         env:
           DEPLOY_ENV: dev
+
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3)
+
       - name: Get tag
         run: |
-          echo ${{ github.tag }}
-          echo ${{ github.sha }}
-          echo ${{ github }}
+          echo ${{ steps.get_version.outputs.VERSION }}
