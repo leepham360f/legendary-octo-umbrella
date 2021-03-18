@@ -1,0 +1,60 @@
+version: "3.2"
+services:
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    ports:
+        - 5672:5672
+        - 15672:15672
+    volumes:
+        - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+        - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+    networks:
+        - rabbitmq_go_net
+  
+  backend:
+    build:
+      context: .
+      dockerfile: app/Dockerfile
+    image: legendary-octo-umbrella/backend
+    ports:
+      - "4002:4002"
+    depends_on:
+      - rabbitmq
+    environment:
+      CLOUDAMQP_URL: amqp://rabbitmq
+    networks:
+      - rabbitmq_go_net
+    volumes:
+    - redis_data:/data
+
+  redis:    
+    image: redis
+    command: redis-server --requirepass 123456
+    ports:
+      - 6379:6379
+    depends_on:
+      - bg-job
+    networks:
+      - rabbitmq_go_net
+  
+  bg-job:
+    build:
+      context: .
+      dockerfile: jobs/Dockerfile
+    image: legendary-octo-umbrella/bg-job
+    ports:
+      - "4000:4000"
+    depends_on:
+      - rabbitmq
+    environment:
+      CLOUDAMQP_URL: amqp://rabbitmq
+      REDIS_HOST: redis
+      CRON: '*/1 * * * *'
+    networks:
+      - rabbitmq_go_net
+
+networks:
+  rabbitmq_go_net:
+    driver: bridge
+volumes:
+  redis_data:

@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bg-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bg
+  template:
+    metadata:
+      labels:
+        app: bg
+    spec:
+      containers:
+        - name: bg
+          image: legendary-octo-umbrella/bg-job
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: CLOUDAMQP_URL
+              value: amqp://rabbitmq-srv
+            - name: REDIS_HOST
+              value: redis-srv
+            - name: CRON
+              value: '*/1 * * * *'
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bg-srv
+spec:
+  selector:
+    app: bg
+  ports:
+    - name: bg
+      protocol: TCP
+      port: 4000
+      targetPort: 4000

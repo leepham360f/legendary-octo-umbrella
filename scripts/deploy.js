@@ -9,7 +9,7 @@ const getTag = () => {
   let tag
   const currentBranch = execSync(`git rev-parse --abbrev-ref HEAD`).toString().trim()
   try {
-    execSync('git fetch --unshallow')
+    execSync('git fetch --tags --unshallow')
     tag = execSync(`git tag -l | grep $(git describe HEAD)`).toString().trim()
     console.log('can get current tag', tag);
   } catch (error) {
@@ -24,13 +24,11 @@ const getTag = () => {
       tag = tag.split('')
       tag[minorVersionIndex] = Number(currentMinorVersion) + 1
       tag = tag.join('')
-      pushTag(tag)
     }
   }
   
   if (currentBranch !== 'dev') {
     tag = tag.replace('dev', currentBranch)
-    pushTag(tag)
   }
 
   return tag
@@ -38,14 +36,9 @@ const getTag = () => {
 
 const tag = getTag()
 console.log(tag)
-if (!tag) {
-  console.log('No tag found.')
-  return
-}
-
-const imageName = `hienpham95/demo-deploy:${tag}`;
-const buildImageCmd = `docker build -t ${imageName} .`
-execSync(buildImageCmd)
-execSync(`docker push ${imageName}`).toString().trim()
-
+pushTag(tag)
+// const imageName = `hienpham95/demo-deploy:${tag}`;
+// const buildImageCmd = `docker build -t ${imageName} .`
+// execSync(buildImageCmd)
+// execSync(`docker push ${imageName}`)
 // git tag -a fpro-v1.0.0.dev -m "tag version"

@@ -1,4 +1,4 @@
-name: Deploy to UAT
+name: Deploy to DEV
 
 on:
   push:
@@ -29,7 +29,22 @@ jobs:
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
       
-      - name: Create tag and build docker image
-        run: npm run deploy
-        env:
-          DEPLOY_ENV: dev
+      # - name: Create tag and build docker image
+        # run: npm run deploy
+        # env:
+        #   DEPLOY_ENV: dev
+
+      - name: Get the version
+        id: get_version
+        run: |
+          git fetch --tags --unshallow
+          echo ::set-output name=tag_version::$(echo $(git describe --tags --abbrev=0))
+
+      - name: Get tag
+        run: |
+          echo ${{ steps.get_version.outputs.tag_version }}
+      
+      # - name: Apply k8s
+      #   run: echo $SOURCE_TAG
+      #   env:
+      #     SOURCE_TAG: ${{ steps.get_version.outputs.VERSION }}
