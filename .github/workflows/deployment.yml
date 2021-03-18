@@ -29,15 +29,15 @@ jobs:
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
       
-      - name: Create tag and build docker image
-        run: npm run deploy
-        env:
-          DEPLOY_ENV: dev
+      # - name: Create tag and build docker image
+        # run: npm run deploy
+        # env:
+        #   DEPLOY_ENV: dev
 
       - name: Get the version
         id: get_version
         run: |
-          echo ::set-output name=VERSION::$(echo $(git describe HEAD))
+          echo ::set-output name=tag_version::$(echo $(git describe --tags --abbrev=0))
 
       - name: Get tag
         run: |
