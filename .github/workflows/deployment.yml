@@ -37,6 +37,7 @@ jobs:
       - name: Get the version
         id: get_version
         run: |
+          git fetch --tags --unshallow
           echo ::set-output name=tag_version::$(echo $(git describe --tags --abbrev=0))
 
       - name: Get tag
