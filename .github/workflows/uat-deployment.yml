@@ -24,7 +24,15 @@ jobs:
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
           
-      - name: Create tag and build docker image
-        run: npm run deploy
-        env:
-          DEPLOY_ENV: uat
+      - name: Get the version
+        id: get_version
+        run: |
+          git fetch --tags --unshallow
+          echo ::set-output name=tag_version::$(echo $(git describe --tags --abbrev=0))
+
+      - name: Get tag
+        run: |
+          dev_tag=${{ steps.get_version.outputs.tag_version }}
+          replace="uat"
+          echo ${dev_tag//dev/$replace}
+          echo ${{ steps.get_version.outputs.tag_version }}
