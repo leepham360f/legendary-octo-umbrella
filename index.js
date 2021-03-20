@@ -6,7 +6,7 @@ const app = express()
 
 const posts = {}
 
-
+// add comment
 app.get("/", (req, res) => {
   res.send({
     data: 'hello world'
