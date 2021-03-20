@@ -6,7 +6,7 @@ const app = express()
 
 const posts = {}
 
-
+// add comment
 app.get("/", (req, res) => {
   res.send({
     data: 'hello world'
@@ -15,4 +15,4 @@ app.get("/", (req, res) => {
 
 app.listen(4002, async () => {
   console.log("Listening on 4002")
-})
+});
