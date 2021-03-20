@@ -15,4 +15,4 @@ app.get("/", (req, res) => {
 
 app.listen(4002, async () => {
   console.log("Listening on 4002")
-})
+});
