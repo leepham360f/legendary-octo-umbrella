@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress-service
@@ -10,15 +10,18 @@ spec:
     - host: hp.test
       http:
         paths:
-          - path: /app/?(.*)
+          - path: /app(/|$)(.*)
+            pathType: Prefix
             backend:
-              serviceName: backend-srv
-              servicePort: 4002
-          - path: /bg/?(.*)
-            backend:
-              serviceName: bg-srv
-              servicePort: 4000
-          - path: /?(.*)
-            backend:
-              serviceName: rabbitmq-srv
-              servicePort: 15672
+              service:
+                name: backend-srv
+                port:
+                  number: 4002
+          # - path: /bg/?(.*)
+          #   backend:
+          #     serviceName: bg-srv
+          #     servicePort: 4000
+          # - path: /?(.*)
+          #   backend:
+          #     serviceName: rabbitmq-srv
+          #     servicePort: 15672

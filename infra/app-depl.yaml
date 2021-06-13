@@ -12,6 +12,10 @@ spec:
       labels:
         app: backend
     spec:
+      volumes:
+      - name: myvolume
+        persistentVolumeClaim:
+          claimName: pvc1
       containers:
         - name: backend
           image: legendary-octo-umbrella/backend
@@ -19,6 +23,10 @@ spec:
           env:
             - name: CLOUDAMQP_URL
               value: amqp://rabbitmq-srv
+          volumeMounts:
+          - mountPath: "/app/logs"
+            name: myvolume
+
 ---
 apiVersion: v1
 kind: Service
